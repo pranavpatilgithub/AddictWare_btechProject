@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdditWare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&family=Rowdies:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            font-family: "Albert Sans", serif;
+
+            background-color: black;
+            color: white;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1% 8%;
+        }
+
+        .n-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .n-left a {
+            text-decoration: none;
+            color: white;
+            font-family: "Albert Sans", serif;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .n-left img {
+            width: 30px;
+            border-radius: 50%;
+        }
+
+        .n-right {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .n-right a {
+            text-decoration: none;
+            color: white;
+            font-size: 22px;
+        }
+        .form-div{
+            padding: 1% 8%;
+        }
+        form{
+            width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: flex-start;
+            background-color: rgb(14, 14, 14);
+            padding: 30px 15px;
+            border-radius: 10px;
+        }
+        form h2{
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 25px;
+        }
+        form input{
+            width: 100%;
+            background-color: rgb(22,22,22);
+            border: none;
+            padding: 12px;
+            color: white;
+            font-family: "Albert Sans", serif;
+            border-radius: 5px;
+        }
+        ::placeholder{
+            color: rgb(174, 174, 174);
+        }
+        form button{
+            background-color: #28a745;
+            padding: 8px 18px;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: "Albert Sans", serif;
+        }
+        form p{
+           margin: 0 auto;
+        }
+        form p a{
+            color: royalblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main_r">
+        <div class="navbar">
+            <div class="n-left">
+                <img src="/static/icons/LOGO.png" alt="">
+                <a href="/">AddictWare</a>
+            </div>
+            <div class="n-right">
+                <a href="https://github.com/pranavpatilgithub/AddictWare_btechProject"><i class='bx bxl-github'></i></a>
+            </div>
+        </div>
+
+        <div class="form-div">
+            <form action="/register" method="post">
+                <h2>Registeration Form</h2>
+                <input type="text" placeholder="Username" name="name">
+                <input type="email" placeholder="Email" name="email">
+                <input type="password" name="password" placeholder="password">
+                <input type="password" name="rpassword" placeholder="Confirm Password">
+                <input type="text" name="pet" placeholder="What is your nick name?">
+                <button type="submit">Next</button>
+                <p>Already have a account? <a href="/login">Sign-in Now</a></p>
+            </form>
+            <span>{{error}}</span>
+        </div>
+    </div>
+
+</body>
+
+</html>
