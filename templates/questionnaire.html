@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internet Usage Questionnaire</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&family=Rowdies:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/static/stylesheets/style.css">
+    <style>
+        .main_q form {
+            width: 60%;
+            margin: 0 auto;
+            background-color: rgb(17, 17, 17);
+            padding: 15px 30px;
+            border-radius: 15px;
+            
+        }
+
+        .main_q form li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .main_q form h3 {
+            font-size: 22px;
+            font-weight: 400;
+        }
+
+        .main_q form hr {
+            margin-top: 15px;
+            margin-bottom: 50px;
+            border: 1px solid rgb(56, 56, 56);
+        }
+
+        .main_q form ol hr {
+            border: 0.5px solid rgb(42, 42, 42);
+            margin: 15px 0;
+        }
+
+        .main_q form button {
+            background-color: royalblue;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .main_q form select {
+            background-color: rgb(66, 66, 66);
+            border: none;
+            font-size: 14px;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .result-div{
+            width: 60%;
+            margin: 0 auto;
+            background-color: rgb(62, 86, 62);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px;
+            margin-top: 80px;
+            margin-bottom: 20px;
+        }
+        
+        .copyright{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10rem;
+        }
+        /* width */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #888888;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #1b1b1b;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        .footer {
+            width: 100%;
+            height: 350px;
+            background-color: rgba(11, 11, 11, 0.783);
+            color: #fff;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+
+        }
+
+        .footer-section {
+            flex: 1;
+            margin: 10px;
+            min-width: 200px;
+        }
+
+        .footer-section h4 {
+            color: #ffffff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #a0a0a0;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #4ecdc4;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .social-icons a {
+            color: #a0a0a0;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #4ecdc4;
+        }
+
+        .footer-bottom {
+            background-color: rgba(20, 20, 20, 0.9);
+            color: #a0a0a0;
+            text-align: center;
+            padding: 15px;
+            width: 100%;
+        }
+
+        .contact-info {
+            font-size: 0.8em;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="main_q">
+        <div class="navbar">
+            <div class="n-left">
+                <img src="/static/icons/LOGO.png" alt="">
+                <a href="/">AddictWare</a>
+            </div>
+            <div class="n-right">
+                <a href="/">Home</a>
+                <a href="questionnaire" style="border-bottom: 2px solid royalblue;">Questionnaire</a>
+                <a href='ml'>ML Prediction</a>
+                <a href='extension'>Services</a>
+                <a href="precautions">Precautions</a>
+
+                {% if 'user' in session %}
+                    <span style="color: #008c8c;;">Welcome, {{ session['user'] }}</span>
+                    <a href='logout' class="btn btn-danger">Logout</a>
+                {% else %}
+                    <button><a href='register'>Get Started</a></button>
+                {% endif %}
+            </div>
+        </div>
+        <div class="result-div">
+            <p>Total Score: {{total_score}}</p>
+            <p>Average Score: {{average_score}}</p>
+            <p>Test Result: {{result}}</p>
+            
+        </div>
+        <form action="/answers" method="POST">
+            <h3>Internet Addiction Questionaire</h3>
+            <hr>
+            
+            <ol>
+                <li>
+                    <label for="q1">How often do you find that you stay online longer than you intended?</label>
+                    <select name="q1" id="q1">
+                        <option value="0">Not Applicable</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Occasionally</option>
+                        <option value="3">Frequently</option>
+                        <option value="4">Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </li>
+                <hr>
+                <li>
+                    <label for="q2">How often do you neglect household chores to spend more time online?</label>
+                    <select name="q2" id="q2">
+                        <option value="0">Not Applicable</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Occasionally</option>
+                        <option value="3">Frequently</option>
+                        <option value="4">Often</option>
+                        <option value="5">Always</option>
+                    </select>
+
+                </li>
+                <hr>
+                <li>
+                    <label for="q3">How often do you prefer the excitement of the Internet to intimacy with your
+                        partner?</label>
+                    <select name="q3" id="q3">
+                        <option value="0">Not Applicable</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Occasionally</option>
+                        <option value="3">Frequently</option>
+                        <option value="4">Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </li>
+                <hr>
+                <li>
+                    <label for="q4">How often do you form new relationships with fellow online users?</label>
+                    <select name="q4" id="q4">
+                        <option value="0">Not Applicable</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Occasionally</option>
+                        <option value="3">Frequently</option>
+                        <option value="4">Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </li>
+                <hr>
+                <li>
+                    <label for="q5">How often do others in your life complain to you about the amount of time you spend
+                        online?</label>
+                    <select name="q5" id="q5">
+                        <option value="0">Not Applicable</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Occasionally</option>
+                        <option value="3">Frequently</option>
+                        <option value="4">Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </li>
+                <hr>
+                <li>
+                    <label for="q6">How often do your grades or school work suffer because of the amount of time you
+                        spend
+                        online?</label>
+                    <select name="q6" id="q6">
+                        <option value="0">Not Applicable</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Occasionally</option>
+                        <option value="3">Frequently</option>
+                        <option value="4">Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </li>
+                <hr>
+                <li>
+                    <label for="q7">How often do you check your email before something else that you need to do?</label>
+                    <select name="q7" id="q7">
+                        <option value="0">Not Applicable</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Occasionally</option>
+                        <option value="3">Frequently</option>
+                        <option value="4">Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </li>
+                <hr>
+                <li>
+                    <label for="q8">How often does your job performance or productivity suffer because of the
+                        Internet?</label>
+                    <select name="q8" id="q8">
+                        <option value="0">Not Applicable</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Occasionally</option>
+                        <option value="3">Frequently</option>
+                        <option value="4">Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </li>
+                <hr>
+                <li>
+                    <label for="q9">How often do you become defensive or secretive when anyone asks you what you do
+                        online?</label>
+                    <select name="q9" id="q9">
+                        <option value="0">Not Applicable</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Occasionally</option>
+                        <option value="3">Frequently</option>
+                        <option value="4">Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </li>
+                <hr>
+                <li>
+                    <label for="q10">How often do you block out disturbing thoughts about your life with soothing
+                        thoughts
+                        of the Internet?</label>
+                    <select name="q10" id="q10">
+                        <option value="0">Not Applicable</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Occasionally</option>
+                        <option value="3">Frequently</option>
+                        <option value="4">Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </li>
+                <hr>
+                <li>
+                    <label for="q11">How often do you find yourself anticipating when you will go online again?</label>
+                    <select name="q11" id="q11">
+                        <option value="0">Not Applicable</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Occasionally</option>
+                        <option value="3">Frequently</option>
+                        <option value="4">Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </li>
+                <hr>
+                <li>
+                    <label for="q12">How often do you fear that life without the Internet would be boring, empty, and
+                        joyless?</label>
+                    <select name="q12" id="q12">
+                        <option value="0">Not Applicable</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Occasionally</option>
+                        <option value="3">Frequently</option>
+                        <option value="4">Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </li>
+                <hr>
+                <li>
+                    <label for="q13">How often do you snap, yell, or act annoyed if someone bothers you while you are
+                        online?</label>
+                    <select name="q13" id="q13">
+                        <option value="0">Not Applicable</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Occasionally</option>
+                        <option value="3">Frequently</option>
+                        <option value="4">Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </li>
+                <hr>
+                <li>
+                    <label for="q14">How often do you lose sleep due to being online?</label>
+                    <select name="q14" id="q14">
+                        <option value="0">Not Applicable</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Occasionally</option>
+                        <option value="3">Frequently</option>
+                        <option value="4">Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </li>
+                <hr>
+                <li>
+                    <label for="q15">How often do you feel preoccupied with the Internet when off-line, or fantasize
+                        about
+                        being online?</label>
+                    <select name="q15" id="q15">
+                        <option value="0">Not Applicable</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Occasionally</option>
+                        <option value="3">Frequently</option>
+                        <option value="4">Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </li>
+                <hr>
+                <li>
+                    <label for="q16">How often do you find yourself saying "just a few more minutes" when
+                        online?</label>
+                    <select name="q16" id="q16">
+                        <option value="0">Not Applicable</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Occasionally</option>
+                        <option value="3">Frequently</option>
+                        <option value="4">Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </li>
+                <hr>
+                <li>
+                    <label for="q17">How often do you try to cut down the amount of time you spend online and
+                        fail?</label>
+                    <select name="q17" id="q17">
+                        <option value="0">Not Applicable</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Occasionally</option>
+                        <option value="3">Frequently</option>
+                        <option value="4">Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </li>
+                <hr>
+                <li>
+                    <label for="q18">How often do you try to hide how long you've been online?</label>
+                    <select name="q18" id="q18">
+                        <option value="0">Not Applicable</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Occasionally</option>
+                        <option value="3">Frequently</option>
+                        <option value="4">Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </li>
+                <hr>
+                <li>
+                    <label for="q19">How often do you choose to spend more time online over going out with
+                        others?</label>
+                    <select name="q19" id="q19">
+                        <option value="0">Not Applicable</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Occasionally</option>
+                        <option value="3">Frequently</option>
+                        <option value="4">Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </li>
+                <hr>
+                <li>
+                    <label for="q20">How often do you feel depressed, moody, or nervous when you are off-line, which
+                        goes
+                        away once you are back online?</label>
+                    <select name="q20" id="q20">
+                        <option value="0">Not Applicable</option>
+                        <option value="1">Rarely</option>
+                        <option value="2">Occasionally</option>
+                        <option value="3">Frequently</option>
+                        <option value="4">Often</option>
+                        <option value="5">Always</option>
+                    </select>
+                </li>
+            </ol>
+            <button type="submit" {% if disable_submit %}disabled{% endif %}>Submit</button>
+            
+        </form>
+        <br>
+        
+    </div>
+    <footer class="footer">
+        <div class="footer-section">
+            <h4>Project Overview</h4>
+            <ul>
+                <li><a href="#">Machine Learning Model</a></li>
+                <li><a href="#">Digital Wellbeing Research</a></li>
+                <li><a href="#">Addiction Prediction Algorithm</a></li>
+                <li><a href="#">Research Methodology</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Services & Features</h4>
+            <ul>
+                <li><a href="questionnaire">Addiction Risk Assessment</a></li>
+                <li><a href="ml">ML Based Prediction</a></li>
+                <li><a href="extension">Browser Wellbeing - Extension</a></li>
+                <li><a href="extension">Focus Model - Extension</a></li>
+                
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Academic Information</h4>
+            <ul>
+                <li><a href="#">Department of Computer Science</a></li>
+                <li><a href="#">Final Year B.Tech Project</a></li>
+                <li><a href="#">Academic Supervisor</a></li>
+                <li><a href="#">Project Methodology</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Connect & Collaborate</h4>
+            <div class="social-icons">
+                <a href="https://github.com/pranavpatilgithub" aria-label="GitHub">GitHub</a>
+                <a href="https://www.linkedin.com/in/thepranavpatil/" aria-label="LinkedIn">LinkedIn</a>
+                
+            </div>
+            <div class="contact-info">
+                <p>Email: 010pranavpatil@gmail.com</p>
+                <p>Contact: +91 (123) 456-7890</p>
+            </div>
+        </div>
+    </footer>
+    <div class="footer-bottom">
+        © 2024 AddictWare | B.Tech Final Year Project
+    </div>
+</body>
+
+</html>
