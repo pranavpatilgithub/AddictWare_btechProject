@@ -1,0 +1,133 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* 
+@font-face {
+    font-family: 'Albert Sans';
+    src: url('/fonts/Albert_Sans/AlbertSans-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Albert Sans';
+    src: url('/fonts/Albert_Sans/static/AlbertSans-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Rowdies';
+    src: url('/fonts/Rowdies/Rowdies-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+} */
+
+
+body {
+    width: 100%;
+    font-family: "Albert Sans", serif;
+    
+    background-color: black;
+    color: white;
+}
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1% 8%;
+}
+.n-left{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.n-left a{
+    text-decoration: none;
+    color: white;
+    font-family: "Albert Sans", serif;
+    font-size: 18px;
+    font-weight: 500;
+}
+.n-left img{
+    width: 30px;
+    border-radius: 50%;
+}
+.n-right{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+.n-right a{
+    text-decoration: none;
+    color: white;
+}
+.n-right button{
+    border: none;
+    padding: 10px 15px;
+    background-color: royalblue;
+    font-family: "Albert Sans", serif;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.n-right button a{
+    color: white;
+}
+.main{
+    width: 100%;
+}
+.hero-section{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5% 10%;
+    height: 37rem;
+}
+.hero-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.hero-container h1{
+    font-family: "Albert Sans", serif;
+    font-size: 4.5rem;
+    font-weight: 800;
+}
+.hero-container p{
+    text-align: center;
+    margin: 30px 0;
+    font-family: "Albert Sans", serif;
+    font-size: 16px;
+    color: #a0a0a0;
+    width: 80%;
+}
+#assess{
+    background-color: #3679e6;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
+#explore{
+    background-color: #8113ff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
+.hero-container button a{
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+}
+.gradient-text {
+    background: linear-gradient(90deg, #3679e6 0%, #4e14a0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
